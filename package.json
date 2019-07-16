@@ -3,15 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/register": "^7.0.0",
+    "@material-ui/core": "^4.2.0",
+    "@material-ui/icons": "^4.2.1",
+    "cross-fetch": "^3.0.4",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "fetch-mock": "^7.3.6",
+    "ignore-styles": "^5.0.1",
+    "import": "^0.0.6",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-infinite-scroll-component": "^4.5.2",
+    "react-redux": "^7.1.0",
+    "react-scripts": "3.0.1",
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm run build && node --inspect server/bootstrap.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -27,5 +42,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/react": "^8.0.5",
+    "cypress": "^3.4.0",
+    "redux-mock-store": "^1.5.3"
   }
 }
