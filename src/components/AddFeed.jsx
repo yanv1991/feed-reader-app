@@ -46,7 +46,7 @@ export const AddFeed = React.memo(
   
     return (
       <Fragment>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={11} sm={10} md={4}>
           <TextField
             id="filled-full-width"
             inputProps={{ 'data-testid':"urlFeed" }}
@@ -62,7 +62,7 @@ export const AddFeed = React.memo(
             onChange={onChangeUrl}
           />
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={11} sm={10} md={4}>
           <Button
             variant="contained"
             color="primary"

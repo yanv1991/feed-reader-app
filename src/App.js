@@ -24,7 +24,12 @@ const useStyles = makeStyles(theme => ({
     overflow: "hidden",
     textOverflow: "ellipsis",
   },
-  mainContainer: { marginTop: '5rem' }
+  mainContainer: {
+    marginTop: '5rem',
+    "& div:nth-child(3)": {
+      overflow: "hidden"
+    }
+  }
 }));
 
 export default function SimpleContainer() {

@@ -72,7 +72,7 @@ const FeedList = ({ isFetching, skip, fetched, feeds = [], onFetchFeeds, hasMore
       >
         {feeds.map((currentItem, index) => {
           return (
-            <Grid key={`${currentItem.link}${index}`} item xs={12} sm={4}>
+            <Grid key={`${currentItem.link}${index}`} item xs={12} sm={11} md={4}>
               <Card className={classes.card}>
                 <CardContent>
                   <Typography
