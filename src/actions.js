@@ -74,9 +74,9 @@ export function createFeed(url) {
       body: JSON.stringify({ url })
     })
       .then(
-        response => response.json(),
-        error => console.log("An error occurred.", error)
+        response => response.json()
       )
-      .then(json => dispatch(addFeed(json)));
+      .then(json => dispatch(addFeed(json)))
+      .catch(err => dispatch(sendError(err)))
   };
 }

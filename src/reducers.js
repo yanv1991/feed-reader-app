@@ -9,9 +9,9 @@ export default function feed(state = initialState, action) {
     case "REQUEST_FEEDS":
       return { ...state, isFetching: true };
     case "ADD_FEEDS_SUCESS":
-      return { ...state, feeds: state.feeds.concat(action.payload), showSuccess: true };
+      return { ...state, feeds: state.feeds.concat(action.payload), showSuccess: true, hasError: false };
     case "ADD_FEEDS_ERROR":
-      return { ...state, hasError: true };
+      return { ...state, hasError: true, showSuccess: true };
     case "RECEIVE_FEEDS":
       return {
           ...state,

@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     textAlign: "center",
     color: theme.palette.text.secondary
   },
-  card: { margin: "1rem", height: '40rem' },
+  card: { margin: "1rem", height: '40rem', overflowY: "auto" },
   button: {
     margin: theme.spacing(1)
   },

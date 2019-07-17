@@ -3,7 +3,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import { green } from '@material-ui/core/colors';
+import { green, red } from '@material-ui/core/colors';
 import { connect } from 'react-redux';
 import { compose } from 'redux'
 
@@ -15,6 +15,9 @@ const styles = theme => ({
   },
   success: {
     backgroundColor: green[600],
+  },
+  error: {
+    backgroundColor: red[600],
   },
 });
 
@@ -39,7 +42,8 @@ class Message extends React.Component {
   };
 
   render() {
-    const { classes, showSuccess } = this.props;
+    const { classes, showMessage, hasError } = this.props;
+    const msg = hasError ? "something went wrong" : "Item added successfully"
 
     return (
       <div>
@@ -48,16 +52,15 @@ class Message extends React.Component {
             vertical: 'bottom',
             horizontal: 'left',
           }}
-          className={classes.success}
-          open={showSuccess}
+          open={showMessage}
           autoHideDuration={6000}
           onClose={this.handleClose}
           onExited={this.handleExited}
           ContentProps={{
             'aria-describedby': 'client-snackbar',
-            classes: { root: classes.success }
+            classes: { root: hasError ? classes.error : classes.success }
           }}
-          message={<span id="message-id">{"Item added successfully"}</span>}
+          message={<span id="message-id">{msg}</span>}
           action={[,
             <IconButton
               key="close"
@@ -76,6 +79,6 @@ class Message extends React.Component {
 }
 
 export default compose(
-  connect(({ showSuccess }) => ({ showSuccess }), { onHideClose: hideClose }),
+  connect(({ showSuccess: showMessage, hasError }) => ({ showMessage, hasError }), { onHideClose: hideClose }),
   withStyles(styles)
 )(Message)
