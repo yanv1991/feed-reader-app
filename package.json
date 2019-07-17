@@ -22,7 +22,7 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "npm run build && node --inspect server/bootstrap.js",
+    "start": "npm run build && node server/bootstrap.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
