@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { createFeed } from "../actions";
 import { isValidURL } from "../helpers";
@@ -34,10 +35,15 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("xs")]: {
       flexDirection: 'column'
     },
+  },
+  loading: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 }));
 
-export const AddFeed = React.memo(({ onCreateFeed }) => {
+export const AddFeed = React.memo(({ onCreateFeed, isAddingItem }) => {
   const classes = useStyles();
   const [url, setUrl] = useState("");
 
@@ -85,12 +91,17 @@ export const AddFeed = React.memo(({ onCreateFeed }) => {
             Add feed
           </Button>
         </Grid>
+        {
+          isAddingItem && <Grid item xs={11} sm={10} md={2} className={`${classes.item} ${classes.loading}`}>
+          <CircularProgress disableShrink />
+          </Grid>
+        }
       </form>
     </Fragment>
   );
 });
 
 export default connect(
-  null,
+  ({ isAddingItem }) => ({ isAddingItem }),
   { onCreateFeed: createFeed }
 )(AddFeed);

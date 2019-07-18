@@ -1,6 +1,7 @@
 import fetch from "cross-fetch";
 
 export const REQUEST_FEEDS = "REQUEST_FEEDS";
+export const ADDING_FEED = "ADDING_FEED"
 export const ADD_FEEDS_SUCESS = "ADD_FEEDS_SUCESS";
 export const ADD_FEEDS_ERROR = "ADD_FEEDS_ERROR";
 export const HIDE_CLOSE = "HIDE_CLOSE"
@@ -10,6 +11,12 @@ const API_URL = "http://localhost:5000" // TODO: use env files
 function requestFeeds() {
   return {
     type: REQUEST_FEEDS
+  };
+}
+
+function addingFeed() {
+  return {
+    type: ADDING_FEED
   };
 }
 
@@ -64,7 +71,7 @@ export function fetchFeeds(skip, limit) {
 
 export function createFeed(url) {
   return function(dispatch) {
-    dispatch(requestFeeds());
+    dispatch(addingFeed());
 
     return fetch(`${API_URL}/feed`, {
       method: "POST",

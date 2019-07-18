@@ -45,22 +45,22 @@ const useStyles = makeStyles(theme => ({
   loading: { margin: '0 auto' },
 }));
 
-const FeedList = ({ isFetching, skip, fetched, feeds = [], onFetchFeeds, hasMoreItems }) => {
-  const classes = useStyles();
+export const FeedList = ({ isAddingItem, isFetching, skip, fetched, feeds = [], onFetchFeeds, hasMoreItems }) => {
+  const classes = useStyles() || {};
   const showLoading = isFetching && !feeds.length
 
   useEffect(() => {
-    if(!fetched) {
+    if(!fetched && !isFetching) {
       onFetchFeeds(0, INITIAL_COUNT); // this shouldn't be called if the request in SSR was success
     }
-  }, [fetched]);
+  }, [fetched, isFetching]);
 
   const fetchMore = useCallback(() => {
     onFetchFeeds(skip, 0);
   }, [skip]);
 
   return (
-    showLoading ? <Grid item xs={12}><h1>Loading...</h1></Grid> :
+    showLoading || isAddingItem ? <Grid item xs={12}><h1 role="loading">Loading...</h1></Grid> :
 
     <Fragment>
       <InfiniteScroll
@@ -72,7 +72,7 @@ const FeedList = ({ isFetching, skip, fetched, feeds = [], onFetchFeeds, hasMore
       >
         {feeds.map((currentItem, index) => {
           return (
-            <Grid key={`${currentItem.link}${index}`} item xs={12} sm={11} md={4}>
+            <Grid role="item" key={`${currentItem.link}${index}`} item xs={12} sm={11} md={4}>
               <Card className={classes.card}>
                 <CardContent>
                   <Typography

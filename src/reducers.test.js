@@ -29,6 +29,6 @@ describe('feeds reducer', () => {
           payload: { data: 'test' }
         }
       )
-    ).toEqual({ hasError: false, feeds: [{ data: 'test' }], fetched: true, hasMoreItems: false, showSuccess: true  })
+    ).toEqual({ hasError: false, feeds: [{ data: 'test' }], fetched: true, hasMoreItems: false, showSuccess: true, isAddingItem: false  })
   })
 })
