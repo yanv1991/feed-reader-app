@@ -68,7 +68,7 @@ export const AddFeed = React.memo(({ onCreateFeed, isAddingItem }) => {
             id="filled-full-width"
             inputProps={{ "data-testid": "urlFeed" }}
             style={{ margin: 8 }}
-            placeholder="https://blog.safia.rocks/rss"
+            placeholder="https://www.espn.com/espn/rss/news"
             fullWidth
             margin="normal"
             variant="filled"
