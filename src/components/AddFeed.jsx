@@ -46,6 +46,7 @@ const useStyles = makeStyles(theme => ({
 export const AddFeed = React.memo(({ onCreateFeed, isAddingItem }) => {
   const classes = useStyles();
   const [url, setUrl] = useState("");
+  const [error, setError] = useState(false);
 
   const onChangeUrl = useCallback(e => {
     setUrl(e.target.value);
@@ -57,6 +58,9 @@ export const AddFeed = React.memo(({ onCreateFeed, isAddingItem }) => {
     if (isValidURL(url)) {
       onCreateFeed(url);
       setUrl("");
+      setError(false)
+    } else {
+      setError(true)
     }
   }, [url]);
 
@@ -65,6 +69,8 @@ export const AddFeed = React.memo(({ onCreateFeed, isAddingItem }) => {
       <form className={classes.form} noValidate>
         <Grid item xs={11} sm={10} md={4} className={classes.item}>
           <TextField
+            error={error}
+            label={error ? "Invalid URL" : ""}
             id="filled-full-width"
             inputProps={{ "data-testid": "urlFeed" }}
             style={{ margin: 8 }}
