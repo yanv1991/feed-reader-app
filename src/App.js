@@ -3,9 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import AddFeed from './components/AddFeed'
-import Message from './components/Message'
-import FeedList from './components/FeedList'
+import AddFeed from "./components/AddFeed";
+import Message from "./components/Message";
+import FeedList from "./components/FeedList";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,10 +22,10 @@ const useStyles = makeStyles(theme => ({
   truncate: {
     whiteSpace: "nowrap",
     overflow: "hidden",
-    textOverflow: "ellipsis",
+    textOverflow: "ellipsis"
   },
   mainContainer: {
-    marginTop: '5rem',
+    marginTop: "5rem",
     "& div:nth-child(3)": {
       overflow: "hidden"
     }

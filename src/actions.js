@@ -1,12 +1,12 @@
 import fetch from "cross-fetch";
 
 export const REQUEST_FEEDS = "REQUEST_FEEDS";
-export const ADDING_FEED = "ADDING_FEED"
+export const ADDING_FEED = "ADDING_FEED";
 export const ADD_FEEDS_SUCESS = "ADD_FEEDS_SUCESS";
 export const ADD_FEEDS_ERROR = "ADD_FEEDS_ERROR";
-export const HIDE_CLOSE = "HIDE_CLOSE"
+export const HIDE_CLOSE = "HIDE_CLOSE";
 
-const API_URL = "http://localhost:5000" // TODO: use env files
+const API_URL = "http://localhost:5000"; // TODO: use env files
 
 function requestFeeds() {
   return {
@@ -23,13 +23,13 @@ function addingFeed() {
 export const RECEIVE_FEEDS = "RECEIVE_FEEDS";
 
 export function receiveFeeds(payload, skip) {
-  if(!payload) {
+  if (!payload) {
     return sendError();
   }
 
   return {
     type: RECEIVE_FEEDS,
-    payload,
+    payload
   };
 }
 
@@ -40,7 +40,7 @@ export function hideClose() {
 }
 
 export function addFeed(payload) {
-  if (!payload || payload.errors && Object.keys(payload.errors).length) {
+  if (!payload || (payload.errors && Object.keys(payload.errors).length)) {
     return sendError(payload);
   }
   return {
@@ -80,10 +80,8 @@ export function createFeed(url) {
       },
       body: JSON.stringify({ url })
     })
-      .then(
-        response => response.json()
-      )
+      .then(response => response.json())
       .then(json => dispatch(addFeed(json)))
-      .catch(err => dispatch(sendError(err)))
+      .catch(err => dispatch(sendError(err)));
   };
 }

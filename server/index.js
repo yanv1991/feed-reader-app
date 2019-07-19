@@ -1,6 +1,6 @@
-import express from 'express';
+import express from "express";
 
-import indexController from './controllers/index';
+import indexController from "./controllers/index";
 
 const PORT = process.env.PORT || 3000;
 
@@ -9,10 +9,10 @@ const app = express();
 app.use(indexController);
 
 // start the app
-app.listen(PORT, (error) => {
-    if (error) {
-        return console.log('something went wrong', error);
-    }
+app.listen(PORT, error => {
+  if (error) {
+    return console.log("something went wrong", error);
+  }
 
-    console.log("listening on " + PORT + "...");
+  console.log("listening on " + PORT + "...");
 });

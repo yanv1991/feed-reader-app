@@ -32,7 +32,9 @@ export default function feed(state = initialState, action) {
         ...state,
         hasError: true,
         showSuccess: true,
-        isAddingItem: false
+        isAddingItem: false,
+        isFetching: false,
+        fetched: true,
       };
     case RECEIVE_FEEDS:
       return {
@@ -40,7 +42,8 @@ export default function feed(state = initialState, action) {
         feeds: [...state.feeds, ...action.payload],
         fetched: true,
         hasMoreItems: Boolean(action.payload.length),
-        skip: [...state.feeds, ...action.payload].length
+        skip: [...state.feeds, ...action.payload].length,
+        isFetching: false,
       };
     case HIDE_CLOSE:
       return { ...state, showSuccess: false };

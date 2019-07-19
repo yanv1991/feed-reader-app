@@ -1,10 +1,10 @@
-import React, { Fragment, useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { createFeed } from "../actions";
 import { isValidURL } from "../helpers";
@@ -28,18 +28,19 @@ const useStyles = makeStyles(theme => ({
     textOverflow: "ellipsis"
   },
   item: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(2)
   },
   form: {
-    display: "flex", width: "100%",
+    display: "flex",
+    width: "100%",
     [theme.breakpoints.down("xs")]: {
-      flexDirection: 'column'
-    },
+      flexDirection: "column"
+    }
   },
   loading: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   }
 }));
 
@@ -52,58 +53,65 @@ export const AddFeed = React.memo(({ onCreateFeed, isAddingItem }) => {
     setUrl(e.target.value);
   }, []);
 
-  const onSubmitUrl = useCallback((e) => {
-    e.preventDefault();
+  const onSubmitUrl = useCallback(
+    e => {
+      e.preventDefault();
 
-    if (isValidURL(url)) {
-      onCreateFeed(url);
-      setUrl("");
-      setError(false)
-    } else {
-      setError(true)
-    }
-  }, [url]);
+      if (isValidURL(url)) {
+        onCreateFeed(url);
+        setUrl("");
+        setError(false);
+      } else {
+        setError(true);
+      }
+    },
+    [url]
+  );
 
   return (
-    <Fragment>
-      <form className={classes.form} noValidate>
-        <Grid item xs={11} sm={10} md={4} className={classes.item}>
-          <TextField
-            error={error}
-            label={error ? "Invalid URL" : ""}
-            id="filled-full-width"
-            inputProps={{ "data-testid": "urlFeed" }}
-            style={{ margin: 8 }}
-            placeholder="https://www.espn.com/espn/rss/news"
-            fullWidth
-            margin="normal"
-            variant="filled"
-            InputLabelProps={{
-              shrink: true
-            }}
-            value={url}
-            onChange={onChangeUrl}
-          />
-        </Grid>
-        <Grid item xs={11} sm={10} md={4} className={classes.item}>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            onClick={onSubmitUrl}
-            data-testid="sendButton"
-          >
-            Add feed
-          </Button>
-        </Grid>
-        {
-          isAddingItem && <Grid item xs={11} sm={10} md={2} className={`${classes.item} ${classes.loading}`}>
+    <form className={classes.form} noValidate>
+      <Grid item xs={11} sm={10} md={4} className={classes.item}>
+        <TextField
+          error={error}
+          label={error ? "Invalid URL" : ""}
+          id="filled-full-width"
+          inputProps={{ "data-testid": "urlFeed" }}
+          style={{ margin: 8 }}
+          placeholder="https://www.espn.com/espn/rss/news"
+          fullWidth
+          margin="normal"
+          variant="filled"
+          InputLabelProps={{
+            shrink: true
+          }}
+          value={url}
+          onChange={onChangeUrl}
+        />
+      </Grid>
+      <Grid item xs={11} sm={10} md={4} className={classes.item}>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={onSubmitUrl}
+          data-testid="sendButton"
+        >
+          Add feed
+        </Button>
+      </Grid>
+      {isAddingItem && (
+        <Grid
+          item
+          xs={11}
+          sm={10}
+          md={2}
+          className={`${classes.item} ${classes.loading}`}
+        >
           <CircularProgress disableShrink />
-          </Grid>
-        }
-      </form>
-    </Fragment>
+        </Grid>
+      )}
+    </form>
   );
 });
 
