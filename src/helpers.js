@@ -10,3 +10,15 @@ export function isValidURL(str) {
   ); // fragment locator
   return !!pattern.test(str);
 }
+
+export function getHostIpAddress() {
+  const os = require('os');
+
+  for(let addresses of Object.values(os.networkInterfaces())) {
+      for(let add of addresses) {
+          if(add.address.startsWith('192.168.')) {
+              return add.address;
+          }
+      }
+  }
+}

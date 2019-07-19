@@ -1,12 +1,21 @@
 import fetch from "cross-fetch";
 
+import { getHostIpAddress } from "./helpers";
+
 export const REQUEST_FEEDS = "REQUEST_FEEDS";
 export const ADDING_FEED = "ADDING_FEED";
 export const ADD_FEEDS_SUCESS = "ADD_FEEDS_SUCESS";
 export const ADD_FEEDS_ERROR = "ADD_FEEDS_ERROR";
 export const HIDE_CLOSE = "HIDE_CLOSE";
 
-const API_URL = "http://localhost:5000"; // TODO: use env files
+const hostFromServer = getHostIpAddress();
+const host =
+  typeof window !== "undefined" && window.HOST_ADDRESS
+    ? window.HOST_ADDRESS.includes("__HOST_ADDRESS__")
+      ? "localhost"
+      : window.HOST_ADDRESS
+    : hostFromServer;
+const API_URL = `http://${host}:5000`; // TODO: use env files
 
 function requestFeeds() {
   return {

@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 
 // import our main App component
 import App from "../../src/App";
+import { getHostIpAddress } from '../../src/helpers'
 
 const path = require("path");
 const fs = require("fs");
@@ -26,12 +27,14 @@ export default store => (req, res, next) => {
     );
 
     const reduxState = JSON.stringify(store.getState());
+    const hostAddress = getHostIpAddress()
 
     // inject the rendered app into our html and send it
     return res.send(
       htmlData
         .replace('<div id="root"></div>', `<div id="root">${html}</div>`)
         .replace('"__SERVER_REDUX_STATE__"', reduxState)
+        .replace('"__HOST_ADDRESS__"', `"${hostAddress}"`)
     );
   });
 };
