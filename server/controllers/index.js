@@ -1,4 +1,5 @@
 import express from "express";
+import "babel-polyfill";
 
 import serverRenderer from "../middleware/renderer";
 import configureStore from "../../src/store";
