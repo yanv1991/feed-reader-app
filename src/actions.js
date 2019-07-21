@@ -15,7 +15,8 @@ const host =
       ? "localhost"
       : window.HOST_ADDRESS
     : hostFromServer;
-const API_URL = `http://${host}:5000`; // TODO: use env files
+const isDevelopment = process.env.NODE_ENV === `development`
+const API_URL = isDevelopment ?  `http://${host}:4000` : 'https://feed-reader-api.herokuapp.com' // TODO: use env files
 
 function requestFeeds() {
   return {
