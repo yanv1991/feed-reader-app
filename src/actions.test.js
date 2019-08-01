@@ -19,4 +19,13 @@ describe('actions', () => {
     }
     expect(actions.receiveFeeds(payload)).toEqual(expectedAction)
   })
+
+  it('should create an action to delete a feed', () => {
+    const payload = 'testid'
+    const expectedAction = {
+      type: actions.DELETE_FEED_SUCCESS,
+      payload
+    }
+    expect(actions.deleteFeed(payload)).toEqual(expectedAction)
+  })
 })
