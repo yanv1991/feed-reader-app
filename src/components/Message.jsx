@@ -43,7 +43,7 @@ class Message extends React.Component {
 
   render() {
     const { classes, showMessage, hasError } = this.props;
-    const msg = hasError ? "something went wrong" : "Item added successfully";
+    const msg = hasError ? "something went wrong" : "Action executed successfully";
 
     return (
       <div>

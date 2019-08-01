@@ -7,6 +7,7 @@ export const ADDING_FEED = "ADDING_FEED";
 export const ADD_FEEDS_SUCESS = "ADD_FEEDS_SUCESS";
 export const ADD_FEEDS_ERROR = "ADD_FEEDS_ERROR";
 export const HIDE_CLOSE = "HIDE_CLOSE";
+export const DELETE_FEED_SUCCESS = "DELETE_FEED_SUCCESSS"
 
 const hostFromServer = getHostIpAddress();
 const host =
@@ -60,6 +61,16 @@ export function addFeed(payload) {
   };
 }
 
+export function deleteFeed(payload) {
+  if (!payload || (payload.errors && Object.keys(payload.errors).length)) {
+    return sendError(payload);
+  }
+  return {
+    type: DELETE_FEED_SUCCESS,
+    payload
+  };
+}
+
 function sendError(payload) {
   return {
     type: ADD_FEEDS_ERROR,
@@ -93,6 +104,20 @@ export function createFeed(url) {
     })
       .then(response => response.json())
       .then(json => dispatch(addFeed(json)))
+      .catch(err => dispatch(sendError(err)));
+  };
+}
+
+export function removeFeed(id) {
+  return function(dispatch) {
+    return fetch(`${API_URL}/feed?id=${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      },
+    })
+      .then(response => response.json())
+      .then(json => dispatch(deleteFeed(json)))
       .catch(err => dispatch(sendError(err)));
   };
 }

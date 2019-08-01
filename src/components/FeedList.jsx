@@ -9,6 +9,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { fetchFeeds } from "../actions";
+import DeleteFeed from "./DeleteFeed";
 
 const INITIAL_COUNT = 6;
 
@@ -97,6 +98,7 @@ export const FeedList = ({
                   gutterBottom
                 >
                   {currentItem.title}
+                  <DeleteFeed id={currentItem.id} idx={index} />
                 </Typography>
                 {currentItem.items.map((newItem, index) => (
                   <Fragment key={index}>

@@ -4,7 +4,8 @@ import {
   ADD_FEEDS_ERROR,
   ADD_FEEDS_SUCESS,
   RECEIVE_FEEDS,
-  HIDE_CLOSE
+  HIDE_CLOSE,
+  DELETE_FEED_SUCCESS,
 } from "./actions";
 
 export const initialState = {
@@ -27,6 +28,14 @@ export default function feed(state = initialState, action) {
         hasError: false,
         isAddingItem: false
       };
+      case DELETE_FEED_SUCCESS:
+        return {
+          ...state,
+          feeds: state.feeds.filter((item) => item.id !== action.payload.id),
+          showSuccess: true,
+          hasError: false,
+          isAddingItem: false
+        };
     case ADD_FEEDS_ERROR:
       return {
         ...state,
@@ -34,7 +43,7 @@ export default function feed(state = initialState, action) {
         showSuccess: true,
         isAddingItem: false,
         isFetching: false,
-        fetched: true,
+        fetched: true
       };
     case RECEIVE_FEEDS:
       return {
@@ -43,7 +52,7 @@ export default function feed(state = initialState, action) {
         fetched: true,
         hasMoreItems: Boolean(action.payload.length),
         skip: [...state.feeds, ...action.payload].length,
-        isFetching: false,
+        isFetching: false
       };
     case HIDE_CLOSE:
       return { ...state, showSuccess: false };
