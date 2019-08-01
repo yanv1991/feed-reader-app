@@ -10,7 +10,7 @@ describe("feeds reducer", () => {
     });
   });
 
-  it("should handle ADD_FEEDS_SUCESS", () => {
+  it("should return fetched feeds", () => {
     expect(
       reducer(
         {
@@ -24,7 +24,9 @@ describe("feeds reducer", () => {
         }
       )
     ).toEqual({ skip: 0, feeds: [], fetched: true, hasMoreItems: false, isFetching: false });
+  })
 
+  it("should handle ADD_FEEDS_SUCESS", () => {
     expect(
       reducer(
         { feeds: [], fetched: true, hasMoreItems: false },
@@ -36,6 +38,25 @@ describe("feeds reducer", () => {
     ).toEqual({
       hasError: false,
       feeds: [{ data: "test" }],
+      fetched: true,
+      hasMoreItems: false,
+      showSuccess: true,
+      isAddingItem: false,
+    });
+  });
+
+  it("should remove item successfully", () => {
+    expect(
+      reducer(
+        { feeds: [{ data: "test", id: 1 }], fetched: true, hasMoreItems: false },
+        {
+          type: actions.DELETE_FEED_SUCESS,
+          payload: 1,
+        }
+      )
+    ).toEqual({
+      hasError: false,
+      feeds: [],
       fetched: true,
       hasMoreItems: false,
       showSuccess: true,
