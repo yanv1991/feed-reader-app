@@ -1,6 +1,8 @@
 describe('Delete a feed item', () => {
     it('Remove the item from list', () => {
       cy.visit('http://localhost:3000');
+
+      cy.wait(2000)
         
       // we want to remove first item
       cy.get('[data-testid="delete-0"]')
@@ -14,6 +16,6 @@ describe('Delete a feed item', () => {
         .click();
         
       // we should see a success message
-      cy.contains('Item removed successfully');
+      cy.contains('Action executed successfully');
     });
   });

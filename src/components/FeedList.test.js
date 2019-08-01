@@ -5,8 +5,6 @@ import { FeedList } from "./FeedList";
 
 import MOCK from "../mock";
 
-const URL = "https://www.reddit.com/.rss";
-
 describe("<FeedList />", () => {
   let getAllByRole;
   let getByRole;

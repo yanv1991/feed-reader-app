@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent, cleanup } from "@testing-library/react";
-import { DeleteFeed } from "./DeleteFeed";
+import DeleteFeed from "./DeleteFeed";
 
 describe("<AddFeed />", () => {
   let getByTestId;
@@ -8,18 +8,17 @@ describe("<AddFeed />", () => {
   afterEach(cleanup);
 
   describe("clicking the delete button", () => {
+    let sendHandler;
+
     beforeEach(() => {
-      ({ getByTestId } = render(<DeleteFeed id={'test'} />));
+      sendHandler = jest.fn();
+      ({ getByTestId } = render(<DeleteFeed id={'test'} idx={0} onDeleteFeed={sendHandler} />));
 
-      fireEvent.click(getByTestId("delete-button"));
+      fireEvent.click(getByTestId("delete-0"));
     });
 
-    it("clears the text field", () => {
-      expect(getByTestId("confirmation-message").value).toEqual("Are you sure you want to remove this item?");
-    });
-
-    it("calls the send handler", () => {
-      expect(sendHandler).toHaveBeenCalledWith();
+    it("opens confirmation message", () => {
+      expect(getByTestId("confirmation-message").textContent).toEqual("Are you sure you want to delete this item?");
     });
   });
 });

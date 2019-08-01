@@ -1,5 +1,4 @@
 import React, { useState, Fragment } from "react";
-import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -10,15 +9,13 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 
-import { removeFeed } from "../actions";
-
 const useStyles = makeStyles(theme => ({
   margin: {
     margin: theme.spacing(1)
   }
 }));
 
-export const DeleteFeed = React.memo(({ idx, id, onDeleteFeed }) => {
+const DeleteFeed = React.memo(({ idx, id, onDeleteFeed }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -48,7 +45,7 @@ export const DeleteFeed = React.memo(({ idx, id, onDeleteFeed }) => {
       >
         <DialogTitle id="alert-dialog-title">{"Delete feed"}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText id="alert-dialog-description" data-testid="confirmation-message">
             Are you sure you want to delete this item?
           </DialogContentText>
         </DialogContent>
@@ -65,7 +62,4 @@ export const DeleteFeed = React.memo(({ idx, id, onDeleteFeed }) => {
   );
 });
 
-export default connect(
-  null,
-  { onDeleteFeed: removeFeed }
-)(DeleteFeed);
+export default DeleteFeed

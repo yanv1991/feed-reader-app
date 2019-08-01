@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-import { fetchFeeds } from "../actions";
+import { fetchFeeds, removeFeed } from "../actions";
 import DeleteFeed from "./DeleteFeed";
 
 const INITIAL_COUNT = 6;
@@ -43,7 +43,12 @@ const useStyles = makeStyles(theme => ({
       maxWidth: "unset"
     }
   },
-  loading: { margin: "0 auto" }
+  loading: { margin: "0 auto" },
+  title: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  }
 }));
 
 export const FeedList = ({
@@ -53,7 +58,8 @@ export const FeedList = ({
   fetched,
   feeds = [],
   onFetchFeeds,
-  hasMoreItems
+  hasMoreItems,
+  onDeleteFeed,
 }) => {
   const classes = useStyles() || {};
   const showLoading = isFetching && !feeds.length;
@@ -98,7 +104,7 @@ export const FeedList = ({
                   gutterBottom
                 >
                   {currentItem.title}
-                  <DeleteFeed id={currentItem.id} idx={index} />
+                  <DeleteFeed id={currentItem.id} idx={index} onDeleteFeed={onDeleteFeed} />
                 </Typography>
                 {currentItem.items.map((newItem, index) => (
                   <Fragment key={index}>
@@ -129,5 +135,5 @@ export default connect(
   ({ isFetching, skip, feeds, fetched, hasMoreItems }) => {
     return { isFetching, skip, feeds, fetched, hasMoreItems };
   },
-  { onFetchFeeds: fetchFeeds }
+  { onFetchFeeds: fetchFeeds, onDeleteFeed: removeFeed }
 )(FeedList);

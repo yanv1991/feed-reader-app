@@ -48,19 +48,17 @@ describe("feeds reducer", () => {
   it("should remove item successfully", () => {
     expect(
       reducer(
-        { feeds: [{ data: "test", id: 1 }], fetched: true, hasMoreItems: false },
+        { feeds: [{ data: "test", id: 1 }] },
         {
-          type: actions.DELETE_FEED_SUCESS,
-          payload: 1,
+          type: actions.DELETE_FEED_SUCCESS,
+          payload: { id: 1 },
         }
       )
     ).toEqual({
-      hasError: false,
       feeds: [],
-      fetched: true,
-      hasMoreItems: false,
       showSuccess: true,
-      isAddingItem: false,
+      hasError: false,
+      isAddingItem: false
     });
   });
 });
