@@ -22,7 +22,12 @@ const useStyles = makeStyles(theme => ({
     textAlign: "center",
     color: theme.palette.text.secondary
   },
-  card: { margin: "1rem", height: "40rem", overflowY: "auto" },
+  card: {
+    margin: "1rem", height: "40rem", overflowY: "auto",
+    [theme.breakpoints.up("lg")]: {
+      maxWidth: "365px"
+    }
+  },
   button: {
     margin: theme.spacing(1)
   },
